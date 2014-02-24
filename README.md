@@ -3,6 +3,8 @@ TwitchPlaysX
 
 A package that lets you setup your own "Twitch Plays Pokemon" style stream
 
+Hi, anyone from Reddit. Sorry if this submission doesn't fit the guidelines. I thought it was applicable though.
+
 This relies on IRC.pas (which you can find on my github profile)
 
 [Download Windows EXE](https://dl.dropboxusercontent.com/u/33727415/TPX.exe)
