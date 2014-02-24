@@ -1,0 +1,353 @@
+object Form2: TForm2
+  Left = 912
+  Height = 414
+  Top = 106
+  Width = 485
+  BorderIcons = [biMinimize, biMaximize]
+  BorderStyle = bsSingle
+  Caption = 'Options'
+  ClientHeight = 414
+  ClientWidth = 485
+  Color = 8421440
+  Font.CharSet = ANSI_CHARSET
+  Font.Height = -13
+  Font.Name = 'Fixedsys'
+  Font.Pitch = fpFixed
+  Font.Quality = fqDraft
+  OnCreate = FormCreate
+  LCLVersion = '1.0.14.0'
+  object Edit1: TEdit
+    Left = 96
+    Height = 23
+    Top = 8
+    Width = 136
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Fixedsys'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    ParentFont = False
+    TabOrder = 0
+    Text = 'Game Name'
+  end
+  object Label1: TLabel
+    Left = 8
+    Height = 16
+    Top = 13
+    Width = 81
+    Caption = 'Game Name:'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Fixedsys'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 9
+    Height = 16
+    Top = 40
+    Width = 97
+    Caption = 'Key Mappings'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Fixedsys'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object CharMapListBox: TListBox
+    Left = 9
+    Height = 208
+    Top = 64
+    Width = 160
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Fixedsys'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    ItemHeight = 0
+    OnSelectionChange = CharMapListBoxSelectionChange
+    ParentFont = False
+    TabOrder = 1
+  end
+  object Label5: TLabel
+    Left = 9
+    Height = 16
+    Top = 312
+    Width = 65
+    Caption = 'Presses:'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Fixedsys'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object WindowListBox: TListBox
+    Left = 256
+    Height = 328
+    Top = 32
+    Width = 220
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Fixedsys'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    ItemHeight = 0
+    OnSelectionChange = WindowListBoxSelectionChange
+    ParentFont = False
+    TabOrder = 2
+  end
+  object Label4: TLabel
+    Left = 304
+    Height = 16
+    Top = 8
+    Width = 129
+    Caption = 'Window to Record'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Fixedsys'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object Button3: TButton
+    Left = 400
+    Height = 25
+    Top = 364
+    Width = 75
+    Caption = 'Refresh'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Fixedsys'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    OnClick = Button3Click
+    ParentFont = False
+    TabOrder = 3
+  end
+  object Button1: TButton
+    Left = 120
+    Height = 25
+    Top = 40
+    Width = 24
+    Caption = '+'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Fixedsys'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    OnClick = Button1Click
+    ParentFont = False
+    TabOrder = 4
+  end
+  object Button4: TButton
+    Left = 144
+    Height = 25
+    Top = 40
+    Width = 24
+    Caption = '-'
+    Enabled = False
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Fixedsys'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    OnClick = Button4Click
+    ParentFont = False
+    TabOrder = 5
+  end
+  object Label3: TLabel
+    Left = 8
+    Height = 16
+    Top = 355
+    Width = 65
+    Caption = 'Channel:'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Fixedsys'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object Edit2: TEdit
+    Left = 80
+    Height = 24
+    Top = 352
+    Width = 136
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Fixedsys Excelsior 3.01'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
+    TabOrder = 6
+  end
+  object Edit3: TEdit
+    Left = 9
+    Height = 23
+    Top = 280
+    Width = 160
+    Enabled = False
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Fixedsys'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    OnChange = Edit3Change
+    ParentFont = False
+    TabOrder = 7
+  end
+  object VKeysComboBox: TComboBox
+    Left = 80
+    Height = 24
+    Top = 312
+    Width = 100
+    Enabled = False
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Fixedsys Excelsior 3.01'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ItemHeight = 16
+    Items.Strings = (
+      '0'
+      '1'
+      '2'
+      '3'
+      '4'
+      '5'
+      '6'
+      '7'
+      '8'
+      '9'
+      'A'
+      'ADD'
+      'B'
+      'BACK'
+      'C'
+      'CANCEL'
+      'CAPITAL'
+      'CLEAR'
+      'CONTROL'
+      'CONVERT'
+      'D'
+      'DECIMAL'
+      'DELETE'
+      'DIVIDE'
+      'DOWN'
+      'E'
+      'END'
+      'ESCAPE'
+      'F'
+      'F1'
+      'F10'
+      'F11'
+      'F12'
+      'F13'
+      'F14'
+      'F15'
+      'F16'
+      'F17'
+      'F18'
+      'F19'
+      'F2'
+      'F20'
+      'F21'
+      'F22'
+      'F23'
+      'F24'
+      'F3'
+      'F4'
+      'F5'
+      'F6'
+      'F7'
+      'F8'
+      'F9'
+      'G'
+      'H'
+      'HOME'
+      'I'
+      'INSERT'
+      'J'
+      'K'
+      'L'
+      'LBUTTON'
+      'LCONTROL'
+      'LEFT'
+      'LMENU'
+      'LSHIFT'
+      'LWIN'
+      'M'
+      'MBUTTON'
+      'MULTIPLY'
+      'N'
+      'NUMLOCK'
+      'NUMPAD0'
+      'NUMPAD1'
+      'NUMPAD2'
+      'NUMPAD3'
+      'NUMPAD4'
+      'NUMPAD5'
+      'NUMPAD6'
+      'NUMPAD7'
+      'NUMPAD8'
+      'NUMPAD9'
+      'O'
+      'P'
+      'PA1'
+      'Q'
+      'R'
+      'RBUTTON'
+      'RCONTROL'
+      'RETURN'
+      'RIGHT'
+      'RMENU'
+      'RSHIFT'
+      'RWIN'
+      'S'
+      'SCROLL'
+      'SELECT'
+      'SHIFT'
+      'SPACE'
+      'SUBTRACT'
+      'T'
+      'TAB'
+      'U'
+      'UP'
+      'V'
+      'W'
+      'X'
+      'XBUTTON1'
+      'XBUTTON2'
+      'Y'
+      'Z'
+    )
+    OnChange = VKeysComboBoxChange
+    ParentFont = False
+    Style = csDropDownList
+    TabOrder = 8
+  end
+  object ConnectToggle: TToggleBox
+    Left = 32
+    Height = 23
+    Top = 384
+    Width = 123
+    Caption = 'Connect'
+    Enabled = False
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Fixedsys'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    OnChange = ConnectToggleChange
+    ParentFont = False
+    TabOrder = 9
+  end
+end

@@ -1,0 +1,89 @@
+object Form1: TForm1
+  Left = 277
+  Height = 605
+  Top = 139
+  Width = 857
+  Caption = 'TwitchPlaysX'
+  ClientHeight = 605
+  ClientWidth = 857
+  Color = 8421440
+  OnCreate = FormCreate
+  LCLVersion = '1.0.14.0'
+  object Memo1: TMemo
+    AnchorSideLeft.Control = Image1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideBottom.Side = asrBottom
+    Left = 576
+    Height = 533
+    Top = 72
+    Width = 281
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderStyle = bsNone
+    Color = clBlack
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -16
+    Font.Name = '@Fixedsys Excelsior 3.01'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 0
+  end
+  object Image1: TImage
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Side = asrBottom
+    Left = 0
+    Height = 605
+    Top = 0
+    Width = 576
+    Anchors = [akTop, akLeft, akRight, akBottom]
+  end
+  object TwitchPlaysX: TStaticText
+    AnchorSideLeft.Control = Image1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideRight.Control = Image1
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Side = asrCenter
+    Left = 613
+    Height = 33
+    Top = 16
+    Width = 213
+    Alignment = taCenter
+    BorderSpacing.Left = 37
+    Caption = 'TwitchPlaysX'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -32
+    Font.Name = 'Fixedsys'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    ParentFont = False
+    TabOrder = 1
+  end
+  object Label1: TLabel
+    AnchorSideLeft.Control = Image1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = TwitchPlaysX
+    AnchorSideTop.Side = asrBottom
+    Left = 604
+    Height = 17
+    Top = 49
+    Width = 224
+    Alignment = taCenter
+    AutoSize = False
+    BorderSpacing.Left = 28
+    Caption = 'Label1'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Fixedsys'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object ApplicationProperties1: TApplicationProperties
+    OnIdle = ApplicationProperties1Idle
+    left = 576
+    top = 72
+  end
+end
