@@ -90,12 +90,10 @@ begin
     KeyUpEvent := KeyUpSet[I];
     if KeyUpEvent.Stale = 0 then begin
       SendMessage(ActiveWindow, WM_KEYUP, KeyUpEvent.KeyCode, 0);
-      WriteLn('Decreasing keysdowncount');
       KeysDownCount -= 1;
     end
     else begin
       KeyUpEvent.Stale -= 1;
-      Writeln('decreasting stale ' + IntToStr(KeyUpEvent.Stale));
       KeyUpSet[I] := KeyUpEvent;
     end;
   end;
@@ -107,7 +105,6 @@ begin
       if (Form2.CharMapListBox.Items.IndexOf(UpperCase(Message.Content)) <> -1) then begin
     		Memo1.Append(Message.Sender + ': ' + Message.Content);
         SendKey := VKMap[Form2.CharMap[UpperCase(Message.Content)]];
-        Writeln('Posting ' + Message.Content + ' | ' + IntToStr(SendKey));
 				SendMessage(ActiveWindow, WM_KEYDOWN, SendKey, 0);
 
         ScheduleKeyUp(SendKey);
@@ -120,10 +117,6 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-  AllocConsole;      // in Windows unit
-  IsConsole := True; // in System unit
-  SysInitStdIO;
-
   Self.Form2 := TForm2.Create(Nil);
   Self.Form2.Show;
 
