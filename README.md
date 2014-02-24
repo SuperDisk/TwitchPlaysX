@@ -16,3 +16,12 @@ Setup Instructions
 4. Select a window in the list to the right. Not all windows are supported, due to GDI limitations. :(
 5. Type your twitch username into the channel box and hit connect.
 6. Point your streaming application at the TwitchPlaysX window and everything is go. (Theoretically anyway. I've hardly done any testing at all)
+7. Have fun.
+
+Compiling Instructions
+======================
+1. Grab [IRC](https://github.com/SuperDisk/IRC) and put it in the directory
+2. Install Fcl-Stl (it's in the source folder of FPC. Compile and copy to units)
+3. Open .lpi in Lazarus
+4. Build
+5. Yay
