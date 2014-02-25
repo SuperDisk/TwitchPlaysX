@@ -10,6 +10,12 @@ This relies on IRC.pas (which you can find on my github profile)
 [Download Windows EXE](https://dl.dropboxusercontent.com/u/33727415/TPX.exe)
 ====================
 
+Limitations
+===========
+* Doesn't work with Direct3D windows
+* The window it's capturing must be on the screen and not minimized
+* The game must not get its input from GetAsyncKeyState (this shouldn't be a big deal. VisualBoy uses it though, so ***use BGB instead***.)
+
 Setup Instructions
 ==================
 1. Download / Compile / Run the tool
