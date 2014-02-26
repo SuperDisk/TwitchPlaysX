@@ -82,17 +82,6 @@
     <CodeGeneration>
       <TargetCPU Value="i386"/>
     </CodeGeneration>
-    <Linking>
-      <Debugging>
-        <GenerateDebugInfo Value="False"/>
-      </Debugging>
-      <LinkSmart Value="True"/>
-      <Options>
-        <Win32>
-          <GraphicApplication Value="True"/>
-        </Win32>
-      </Options>
-    </Linking>
     <Other>
       <CompilerMessages>
         <MsgFileName Value=""/>
@@ -101,7 +90,7 @@
     </Other>
   </CompilerOptions>
   <Debugging>
-    <Exceptions Count="5">
+    <Exceptions Count="6">
       <Item1>
         <Name Value="EAbort"/>
       </Item1>
@@ -117,6 +106,9 @@
       <Item5>
         <Name Value="EInOutError"/>
       </Item5>
+      <Item6>
+        <Name Value="EInvalidPointer"/>
+      </Item6>
     </Exceptions>
   </Debugging>
 </CONFIG>

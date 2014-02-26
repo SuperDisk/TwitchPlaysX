@@ -1,12 +1,12 @@
 object Form2: TForm2
-  Left = 912
-  Height = 414
-  Top = 106
+  Left = 894
+  Height = 539
+  Top = 97
   Width = 485
   BorderIcons = [biMinimize, biMaximize]
   BorderStyle = bsSingle
   Caption = 'Options'
-  ClientHeight = 414
+  ClientHeight = 539
   ClientWidth = 485
   Color = 8421440
   Font.CharSet = ANSI_CHARSET
@@ -165,7 +165,7 @@ object Form2: TForm2
   object Label3: TLabel
     Left = 8
     Height = 16
-    Top = 355
+    Top = 371
     Width = 65
     Caption = 'Channel:'
     Font.CharSet = ANSI_CHARSET
@@ -179,7 +179,7 @@ object Form2: TForm2
   object Edit2: TEdit
     Left = 80
     Height = 24
-    Top = 352
+    Top = 368
     Width = 136
     Font.CharSet = ANSI_CHARSET
     Font.Height = -16
@@ -337,7 +337,7 @@ object Form2: TForm2
   object ConnectToggle: TToggleBox
     Left = 32
     Height = 23
-    Top = 384
+    Top = 400
     Width = 123
     Caption = 'Connect'
     Enabled = False
@@ -349,5 +349,53 @@ object Form2: TForm2
     OnChange = ConnectToggleChange
     ParentFont = False
     TabOrder = 9
+  end
+  object CheckBox1: TCheckBox
+    Left = 8
+    Height = 19
+    Top = 440
+    Width = 236
+    Caption = 'Anarchy/Democracy Switching'
+    OnChange = CheckBox1Change
+    TabOrder = 10
+  end
+  object RadioGroup1: TRadioGroup
+    Left = 9
+    Height = 65
+    Top = 464
+    Width = 232
+    AutoFill = True
+    Caption = 'Control Mode'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 47
+    ClientWidth = 228
+    TabOrder = 11
+    object RadioButton1: TRadioButton
+      Left = 6
+      Height = 17
+      Top = 6
+      Width = 216
+      Caption = 'Anarchy'
+      Checked = True
+      OnChange = RadioButton1Change
+      TabOrder = 1
+      TabStop = True
+    end
+    object RadioButton2: TRadioButton
+      Left = 6
+      Height = 18
+      Top = 23
+      Width = 216
+      Caption = 'Democracy'
+      OnChange = RadioButton2Change
+      TabOrder = 0
+    end
   end
 end

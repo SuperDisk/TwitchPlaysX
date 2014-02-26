@@ -6,11 +6,12 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  WindowFinder, FGL, Windows, VKeys, IRC;
+  ExtCtrls, WindowFinder, FGL, Windows, VKeys, IRC;
 
 type
   THWNDList = Specialize TFPGList<HWND>;
   TCharMap = Specialize TFPGMap<String, String>;
+  TControlMode = (Anarchy, Democracy);
 
   { TForm2 }
 
@@ -18,7 +19,11 @@ type
     Button1: TButton;
     Button3: TButton;
     Button4: TButton;
+    CheckBox1: TCheckBox;
     ConnectToggle: TToggleBox;
+    RadioButton1: TRadioButton;
+    RadioButton2: TRadioButton;
+    RadioGroup1: TRadioGroup;
     VKeysComboBox: TComboBox;
     Edit1: TEdit;
     Edit2: TEdit;
@@ -34,14 +39,19 @@ type
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure CharMapListBoxSelectionChange(Sender: TObject; User: boolean);
+    procedure CheckBox1Change(Sender: TObject);
     procedure ConnectToggleChange(Sender: TObject);
     procedure Edit3Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure RadioButton1Change(Sender: TObject);
+    procedure RadioButton2Change(Sender: TObject);
     procedure VKeysComboBoxChange(Sender: TObject);
     procedure WindowListBoxSelectionChange(Sender: TObject; User: boolean);
 
   private
      CommandsCounter: Integer;
+     ControlMode: TControlMode;
+     AllowModeSwitching: Boolean;
 
   public
     IRC: TIRCClient;
@@ -86,6 +96,18 @@ begin
     Button4.Enabled := True;
     VKeysComboBox.ItemIndex := VKeysComboBox.Items.IndexOf(CharMap[Edit3.Text]);
   end
+end;
+
+procedure TForm2.CheckBox1Change(Sender: TObject);
+begin
+  AllowModeSwitching := CheckBox1.Checked;
+  RadioGroup1.Enabled := not CheckBox1.Checked;
+
+  if CheckBox1.Checked then ControlMode := Anarchy
+  else begin
+    if RadioButton1.Checked then ControlMode := Anarchy
+    else ControlMode := Democracy;
+  end;
 end;
 
 procedure TForm2.ConnectToggleChange(Sender: TObject);
@@ -152,6 +174,17 @@ procedure TForm2.FormCreate(Sender: TObject);
 begin
   CharMap := TCharMap.Create;
   IRC := TIRCClient.Create(IpFromHostName('irc.twitch.tv'));
+  ControlMode := Anarchy;
+end;
+
+procedure TForm2.RadioButton1Change(Sender: TObject);
+begin
+  ControlMode := Anarchy;
+end;
+
+procedure TForm2.RadioButton2Change(Sender: TObject);
+begin
+  ControlMode := Democracy;
 end;
 
 procedure TForm2.VKeysComboBoxChange(Sender: TObject);

@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ExtCtrls, Windows, Unit2, IRC, VKeys;
+  ExtCtrls, ComCtrls, Windows, Unit2, IRC, VKeys;
 
 type
   TKeyUpEvent = record
@@ -22,21 +22,22 @@ type
     Image1: TImage;
     Label1: TLabel;
     Memo1: TMemo;
+    PaintBox1: TPaintBox;
     TwitchPlaysX: TStaticText;
     procedure ApplicationProperties1Idle(Sender: TObject; var Done: Boolean);
     procedure FormCreate(Sender: TObject);
+    procedure PaintBox1Paint(Sender: TObject);
     procedure ScheduleKeyUp(Key: Integer);
 
   private
     Form2: TForm2;
     KeyUpSet: TKeyUpSet;
     KeysDownCount: Integer;
+    ModeVotes: Integer;
 
   public
     { public declarations }
   end;
-
-function PrintWindow(SourceWindow: hwnd; Destination: hdc; nFlags: cardinal): bool; stdcall; external 'user32.dll' name 'PrintWindow';
 
 var
   Form1: TForm1;
@@ -50,8 +51,7 @@ implementation
 procedure TForm1.ApplicationProperties1Idle(Sender: TObject; var Done: Boolean);
 var
   ActiveWindow: HWND;
-  ActiveDC, OurDC: HDC;
-  Buffer: HBITMAP;
+  ActiveDC: HDC;
   WindowRect: RECT;
   W, H, I: Integer;
   Message: TMessage;
@@ -60,29 +60,35 @@ var
 
 begin
   Label1.Caption := Self.Form2.Edit1.Text;
+  PaintBox1.Visible := Form2.CheckBox1.Checked;
+
+  if Form2.CheckBox1.Checked then Memo1.AnchorSide[akTop].Control := PaintBox1
+  else Memo1.AnchorSide[akTop].Control := Label1;
 
   if Form2.WindowListBox.ItemIndex > 0 then begin
     ActiveWindow := Form2.WindowList[Form2.WindowListBox.ItemIndex];
 
+    try
     GetWindowRect(ActiveWindow, @WindowRect);
     W := WindowRect.Right - WindowRect.Left;
     H := WindowRect.Bottom - WindowRect.Top;
 
+    Image1.Picture.Bitmap.SetSize(W, H);
+    {Image1.Picture.Bitmap.Canvas.Width := W;
+    Image1.Picture.Bitmap.Canvas.Height := H;}
+
+    WriteLN(IntToSTr(Image1.Width) + ' ' + inttoStr(image1.height));
     try
       ActiveDC := GetDC(ActiveWindow);
-      Buffer := CreateCompatibleBitmap(ActiveDC, W, H);
-      OurDC := CreateCompatibleDC(ActiveDC);
-      SelectObject(OurDC, Buffer);
-
-      BitBlt(OurDC, 0, 0, W, H, ActiveDC, 0, 0, SRCCOPY);
-
+      BitBlt(Image1.Picture.Bitmap.Canvas.Handle, 0, 0, W, H, ActiveDC, 0, 0, SRCCOPY);
+      Image1.Refresh;
     finally
-      DeleteDC(OurDC);
       ReleaseDC(ActiveWindow, ActiveDC);
-      DeleteObject(Image1.Picture.Bitmap.Handle);
     end;
 
-    Image1.Picture.Bitmap.Handle := Buffer;
+    except
+      on EInvalidPointer do Form2.WindowListBox.ItemIndex := -1;
+    end;
   end;
 
   //Keyup all of the previous keypresses
@@ -122,6 +128,17 @@ begin
 
   Self.Form2.ReloadWindows;
   KeysDownCount := -1;
+end;
+
+procedure TForm1.PaintBox1Paint(Sender: TObject);
+begin
+  //Democracy vs anarchy
+  PaintBox1.Canvas.Pen.Color := clGray;
+  PaintBox1.Canvas.Brush.Color := clGray;
+  PaintBox1.Canvas.Rectangle(0, 0, PaintBox1.Width, PaintBox1.Height);
+  PaintBox1.Canvas.TextOut(5, 5, 'A');
+  PaintBox1.Canvas.TextOut(PaintBox1.Width-14, 5, 'D');
+  PaintBox1.Canvas.Pen.Mode := pmXOR;
 end;
 
 procedure TForm1.ScheduleKeyUp(Key: Integer);

@@ -1,21 +1,28 @@
 object Form1: TForm1
-  Left = 277
+  Left = 545
   Height = 605
-  Top = 139
+  Top = 112
   Width = 857
   Caption = 'TwitchPlaysX'
   ClientHeight = 605
   ClientWidth = 857
   Color = 8421440
+  Font.CharSet = ANSI_CHARSET
+  Font.Height = -13
+  Font.Name = 'Fixedsys'
+  Font.Pitch = fpFixed
+  Font.Quality = fqDraft
   OnCreate = FormCreate
   LCLVersion = '1.0.14.0'
   object Memo1: TMemo
     AnchorSideLeft.Control = Image1
     AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
     AnchorSideBottom.Side = asrBottom
     Left = 576
-    Height = 533
-    Top = 72
+    Height = 539
+    Top = 66
     Width = 281
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderStyle = bsNone
@@ -31,8 +38,6 @@ object Form1: TForm1
     TabOrder = 0
   end
   object Image1: TImage
-    AnchorSideRight.Side = asrBottom
-    AnchorSideBottom.Side = asrBottom
     Left = 0
     Height = 605
     Top = 0
@@ -81,9 +86,16 @@ object Form1: TForm1
     ParentColor = False
     ParentFont = False
   end
+  object PaintBox1: TPaintBox
+    AnchorSideLeft.Control = Image1
+    AnchorSideLeft.Side = asrBottom
+    Left = 576
+    Height = 25
+    Top = 72
+    Width = 281
+    OnPaint = PaintBox1Paint
+  end
   object ApplicationProperties1: TApplicationProperties
     OnIdle = ApplicationProperties1Idle
-    left = 576
-    top = 72
   end
 end
