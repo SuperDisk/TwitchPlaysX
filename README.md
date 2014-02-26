@@ -33,3 +33,9 @@ Compiling Instructions
 3. Open .lpi in Lazarus
 4. Build
 5. Yay
+
+Thanks
+======
+Many thanks to #FPC and #Lazarus-IDE on Freenode!
+
+Thanks to the Twitch Plays Pokemon author for stirring up interest in this kind of social experiment.
