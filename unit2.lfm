@@ -1,7 +1,7 @@
 object Form2: TForm2
-  Left = 894
+  Left = 931
   Height = 539
-  Top = 97
+  Top = 41
   Width = 485
   BorderIcons = [biMinimize, biMaximize]
   BorderStyle = bsSingle
@@ -98,7 +98,6 @@ object Form2: TForm2
     Font.Pitch = fpFixed
     Font.Quality = fqDraft
     ItemHeight = 0
-    OnSelectionChange = WindowListBoxSelectionChange
     ParentFont = False
     TabOrder = 2
   end
@@ -178,13 +177,13 @@ object Form2: TForm2
   end
   object Edit2: TEdit
     Left = 80
-    Height = 24
+    Height = 23
     Top = 368
     Width = 136
     Font.CharSet = ANSI_CHARSET
     Font.Height = -16
-    Font.Name = 'Fixedsys Excelsior 3.01'
-    Font.Pitch = fpVariable
+    Font.Name = 'Fixedsys'
+    Font.Pitch = fpFixed
     Font.Quality = fqDraft
     ParentFont = False
     TabOrder = 6
@@ -206,16 +205,16 @@ object Form2: TForm2
   end
   object VKeysComboBox: TComboBox
     Left = 80
-    Height = 24
+    Height = 23
     Top = 312
     Width = 100
     Enabled = False
     Font.CharSet = ANSI_CHARSET
     Font.Height = -16
-    Font.Name = 'Fixedsys Excelsior 3.01'
-    Font.Pitch = fpVariable
+    Font.Name = 'Fixedsys'
+    Font.Pitch = fpFixed
     Font.Quality = fqDraft
-    ItemHeight = 16
+    ItemHeight = 15
     Items.Strings = (
       '0'
       '1'
@@ -377,25 +376,51 @@ object Form2: TForm2
     ClientHeight = 47
     ClientWidth = 228
     TabOrder = 11
-    object RadioButton1: TRadioButton
+    object AnarchyRadioButton: TRadioButton
       Left = 6
       Height = 17
       Top = 6
       Width = 216
       Caption = 'Anarchy'
       Checked = True
-      OnChange = RadioButton1Change
+      OnChange = AnarchyRadioButtonChange
       TabOrder = 1
       TabStop = True
     end
-    object RadioButton2: TRadioButton
+    object DemocracyRadioButton: TRadioButton
       Left = 6
       Height = 18
       Top = 23
       Width = 216
       Caption = 'Democracy'
-      OnChange = RadioButton2Change
+      OnChange = DemocracyRadioButtonChange
       TabOrder = 0
     end
+  end
+  object SaveButton: TButton
+    Left = 360
+    Height = 25
+    Top = 480
+    Width = 123
+    Caption = 'Save settings'
+    OnClick = SaveButtonClick
+    TabOrder = 12
+  end
+  object LoadButton: TButton
+    Left = 360
+    Height = 25
+    Top = 512
+    Width = 123
+    Caption = 'Load settings'
+    OnClick = LoadButtonClick
+    TabOrder = 13
+  end
+  object SaveDialog1: TSaveDialog
+    left = 200
+    top = 56
+  end
+  object OpenDialog1: TOpenDialog
+    left = 200
+    top = 114
   end
 end

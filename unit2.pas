@@ -6,24 +6,29 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ExtCtrls, WindowFinder, FGL, Windows, VKeys, IRC;
+  ExtCtrls, WindowFinder, FGL, Windows, VKeys, IRC, INIfiles;
 
 type
   THWNDList = Specialize TFPGList<HWND>;
   TCharMap = Specialize TFPGMap<String, String>;
+  TReverseCharMap = Specialize TFPGMap<String, String>;
   TControlMode = (Anarchy, Democracy);
 
   { TForm2 }
 
   TForm2 = class(TForm)
     Button1: TButton;
+    OpenDialog1: TOpenDialog;
+    SaveButton: TButton;
     Button3: TButton;
     Button4: TButton;
+    LoadButton: TButton;
     CheckBox1: TCheckBox;
     ConnectToggle: TToggleBox;
-    RadioButton1: TRadioButton;
-    RadioButton2: TRadioButton;
+    AnarchyRadioButton: TRadioButton;
+    DemocracyRadioButton: TRadioButton;
     RadioGroup1: TRadioGroup;
+    SaveDialog1: TSaveDialog;
     VKeysComboBox: TComboBox;
     Edit1: TEdit;
     Edit2: TEdit;
@@ -35,16 +40,18 @@ type
     Label5: TLabel;
     CharMapListBox: TListBox;
     WindowListBox: TListBox;
+    procedure AnarchyRadioButtonChange(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure CharMapListBoxSelectionChange(Sender: TObject; User: boolean);
     procedure CheckBox1Change(Sender: TObject);
     procedure ConnectToggleChange(Sender: TObject);
+    procedure DemocracyRadioButtonChange(Sender: TObject);
     procedure Edit3Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure RadioButton1Change(Sender: TObject);
-    procedure RadioButton2Change(Sender: TObject);
+    procedure LoadButtonClick(Sender: TObject);
+    procedure SaveButtonClick(Sender: TObject);
     procedure VKeysComboBoxChange(Sender: TObject);
     procedure WindowListBoxSelectionChange(Sender: TObject; User: boolean);
 
@@ -64,6 +71,8 @@ var
   Form2: TForm2;
 
 implementation
+
+uses Unit1;
 
 {$R *.lfm}
 
@@ -105,7 +114,7 @@ begin
 
   if CheckBox1.Checked then ControlMode := Anarchy
   else begin
-    if RadioButton1.Checked then ControlMode := Anarchy
+    if AnarchyRadioButton.Checked then ControlMode := Anarchy
     else ControlMode := Democracy;
   end;
 end;
@@ -142,6 +151,14 @@ begin
   end;
 end;
 
+procedure TForm2.DemocracyRadioButtonChange(Sender: TObject);
+begin
+  if DemocracyRadioButton.Checked then begin
+    ControlMode := Democracy;
+    TForm1(Owner).DemocracyModeSwitch;
+  end;
+end;
+
 procedure TForm2.Edit3Change(Sender: TObject);
 var
   Caret: TPoint;
@@ -170,6 +187,14 @@ begin
   CommandsCounter += 1;
 end;
 
+procedure TForm2.AnarchyRadioButtonChange(Sender: TObject);
+begin
+  if AnarchyRadioButton.Checked then begin
+    ControlMode := Anarchy;
+    TForm1(Owner).AnarchyModeSwitch;
+  end;
+end;
+
 procedure TForm2.FormCreate(Sender: TObject);
 begin
   CharMap := TCharMap.Create;
@@ -177,14 +202,70 @@ begin
   ControlMode := Anarchy;
 end;
 
-procedure TForm2.RadioButton1Change(Sender: TObject);
+procedure TForm2.LoadButtonClick(Sender: TObject);
+var
+  FileName, WinTitle, ModeStr: String;
+  INI: TINIFile;
+  I: Integer;
+  ValList, KeyVal: TStringList;
 begin
-  ControlMode := Anarchy;
+  OpenDialog1.Execute;
+  FileName := OpenDialog1.FileName;
+
+  INI := TINIFile.Create(FileName, False);
+
+  Edit1.Text := INI.ReadString('TPX', 'GameName', '');
+  WinTitle := INI.ReadString('TPX', 'WindowTitle', '');
+
+  if (WinTitle <> 'NIL') and (WindowListBox.Items.IndexOf(WinTitle) <> 0) then
+    WindowListBox.ItemIndex := WindowListBox.Items.IndexOf(WinTitle);
+
+  CheckBox1.Checked := StrToBool(INI.ReadString('TPX', 'AllowModeSwitch', 'False'));
+
+  ModeStr := INI.ReadString('TPX', 'Mode', 'Anarchy');
+  if ModeStr = 'Anarchy' then Form2.AnarchyRadioButton.Checked := True;
+  if ModeStr = 'Democracy' then Form2.DemocracyRadioButton.Checked := True;
+
+  Edit2.Text := INI.ReadString('IRC', 'Channel', '');
+
+  ValList := TStringList.Create;
+  INI.ReadSectionValues('KEYMAPS', ValList);
+
+  for I := 0 to ValList.Count-1 do begin
+    Split(ValList[I], '=', KeyVal);
+    WriteLN(ValList[I]);
+  end;
+
+  INI.Free;
 end;
 
-procedure TForm2.RadioButton2Change(Sender: TObject);
+procedure TForm2.SaveButtonClick(Sender: TObject);
+var
+  FileName: String;
+  INI: TINIFile;
+  I: Integer;
 begin
-  ControlMode := Democracy;
+  SaveDialog1.Execute;
+  FileName := SaveDialog1.FileName;
+
+  INI := TINIFile.Create(FileName, False);
+
+  INI.WriteString('TPX', 'GameName', Edit1.Text);
+  if WindowListBox.ItemIndex > 0 then
+    INI.WriteString('TPX', 'WindowTitle', WindowListBox.Items[WindowListBox.ItemIndex])
+  else INI.WriteString('TPX', 'WindowTitle', 'NIL');
+
+  INI.WriteString('TPX', 'AllowModeSwitch', BoolToStr(CheckBox1.Checked));
+
+  if AnarchyRadioButton.Checked then INI.WriteString('TPX', 'Mode', 'Anarchy');
+  if DemocracyRadioButton.Checked then INI.WriteString('TPX', 'Mode', 'Democracy');
+
+  INI.WriteString('IRC', 'Channel', Edit2.Text);
+
+  for I := 0 to CharMapListBox.Items.Count-1 do
+    INI.WriteString('KEYMAPS', CharMapListBox.Items[I], CharMap[CharMapListBox.Items[I]]);
+
+  INI.Free;
 end;
 
 procedure TForm2.VKeysComboBoxChange(Sender: TObject);

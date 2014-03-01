@@ -1,10 +1,10 @@
 object Form1: TForm1
-  Left = 545
-  Height = 605
-  Top = 112
+  Left = 94
+  Height = 584
+  Top = 409
   Width = 857
   Caption = 'TwitchPlaysX'
-  ClientHeight = 605
+  ClientHeight = 584
   ClientWidth = 857
   Color = 8421440
   Font.CharSet = ANSI_CHARSET
@@ -19,19 +19,21 @@ object Form1: TForm1
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Label1
     AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Control = Memo2
     AnchorSideBottom.Side = asrBottom
     Left = 576
-    Height = 539
-    Top = 66
+    Height = 592
+    Top = 72
     Width = 281
     Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Top = 6
     BorderStyle = bsNone
     Color = clBlack
     Font.CharSet = ANSI_CHARSET
     Font.Color = clWhite
     Font.Height = -16
-    Font.Name = '@Fixedsys Excelsior 3.01'
-    Font.Pitch = fpVariable
+    Font.Name = 'Fixedsys'
+    Font.Pitch = fpFixed
     Font.Quality = fqDraft
     ParentFont = False
     ReadOnly = True
@@ -39,7 +41,7 @@ object Form1: TForm1
   end
   object Image1: TImage
     Left = 0
-    Height = 605
+    Height = 584
     Top = 0
     Width = 576
     Anchors = [akTop, akLeft, akRight, akBottom]
@@ -95,7 +97,24 @@ object Form1: TForm1
     Width = 281
     OnPaint = PaintBox1Paint
   end
+  object Memo2: TMemo
+    Left = 576
+    Height = 80
+    Top = 584
+    Width = 286
+    Anchors = [akLeft, akBottom]
+    BorderStyle = bsNone
+    Color = clSilver
+    ReadOnly = True
+    TabOrder = 2
+  end
   object ApplicationProperties1: TApplicationProperties
     OnIdle = ApplicationProperties1Idle
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 10000
+    OnTimer = Timer1Timer
+    left = 32
   end
 end

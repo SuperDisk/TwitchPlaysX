@@ -9,12 +9,15 @@ uses
 
 type
   TVKMap = Specialize TFPGMap<String, Integer>;
+  TReverseVKMap = Specialize TFPGMap<Integer, String>;
 
 var
   VKMap: TVKMap;
 
 implementation
 
+var
+  I: Integer;
 begin
   VKMap := TVKMap.Create;
   VKMap.Add('0', VK_0);

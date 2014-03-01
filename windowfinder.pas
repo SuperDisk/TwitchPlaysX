@@ -36,11 +36,13 @@ end;
 function GetWindowName(hound: HWND): String;
 var
   Output: PChar;
+  ReturnVal: String;
 begin
   GetMem(Output, 9999);
   GetWindowText(hound, Output, 999999);
-
-  GetWindowName := String(Output);
+  ReturnVal := String(Output);
+  FreeMem(Output);
+  GetWindowName := ReturnVal;
 end;
 
 end.
